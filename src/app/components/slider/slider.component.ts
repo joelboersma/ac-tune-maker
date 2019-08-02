@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
+import { Options, ChangeContext } from 'ng5-slider';
+import { SoundService } from 'src/app/services/sound.service';
 
 @Component({
   selector: 'app-slider',
@@ -17,17 +18,30 @@ export class SliderComponent implements OnInit {
     vertical: true,
     hideLimitLabels: true,
 
-    translate: (value: number, label: LabelType): string => {
+    translate: (value: number): string => {
       return this.numberToNote(value);
     }
   };
 
-  constructor() { }
+  constructor(private readonly soundService: SoundService) { }
 
   ngOnInit() {
   }
 
   numberToNote(num: number): string {
     return this.vals[num];
+  }
+
+  playNote(): void {
+    if (this.value < 2) {
+      return;
+    }
+
+    let soundNum = this.value.toString();
+    if (this.value <= 9) {
+      soundNum = "0" + soundNum;
+    }
+
+    this.soundService.play(`../../../assets/sounds/${soundNum}.mp3`);
   }
 }
