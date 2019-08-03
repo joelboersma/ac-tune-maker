@@ -30,4 +30,12 @@ export class SliderComponent implements OnInit {
   numberToNote(num: number): string {
     return this.vals[num];
   }
+
+  onUserChangeStart() {
+    
+  }
+
+  onUserChange() {
+
+  }
 }
