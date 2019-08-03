@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
+import { NoteService } from 'src/app/services/note.service';
 
 @Component({
   selector: 'app-slider',
@@ -22,12 +23,20 @@ export class SliderComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor(private readonly noteService: NoteService) { }
 
   ngOnInit() {
   }
 
   numberToNote(num: number): string {
     return this.vals[num];
+  }
+
+  onUserChangeStart() {
+    this.noteService.test();
+  }
+
+  onUserChange() {
+
   }
 }

@@ -1,6 +1,8 @@
 <div id="Slider">
   <ng5-slider 
     [(value)]="value" 
-    [options]="options">
+    [options]="options"
+    (userChangeStart)="onUserChangeStart()"
+    (userChange)="onUserChange()">
   </ng5-slider>
 </div>
