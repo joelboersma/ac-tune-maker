@@ -2,7 +2,8 @@
   <ng5-slider 
     [(value)]="value" 
     [options]="options"
-    (userChangeStart) = "onUserChangeStart()"
-    (userChange) = "onUserChange()">
+    (userChangeStart) = "onUserChangeStart($event)"
+    (userChange) = "onUserChange($event)"
+    (userChangeEnd) = "onUserChangeEnd($event)">
   </ng5-slider>
 </div>
