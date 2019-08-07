@@ -1,61 +1,69 @@
 <h2 id="Title">Animal Crossing Tune Maker</h2>
 
-<div class="container">
+<div class="container" id="Notes">
 
     <!-- Row 1 -->
-    <div class="row" id="RowTop">
+    <div class="row sliderRow" id="RowTop">
         <div class="col">
-            <app-slider (sliderID)="0"></app-slider>
+            <app-slider [sliderID]="0"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="1"></app-slider>
+            <app-slider [sliderID]="1"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="2"></app-slider>
+            <app-slider [sliderID]="2"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="3"></app-slider>
+            <app-slider [sliderID]="3"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="4"></app-slider>
+            <app-slider [sliderID]="4"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="5"></app-slider>
+            <app-slider [sliderID]="5"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="6"></app-slider>
+            <app-slider [sliderID]="6"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="7"></app-slider>
+            <app-slider [sliderID]="7"></app-slider>
         </div>
     </div>
 
     <!-- Row 2 -->
-    <div class="row" id="RowBottom">
+    <div class="row sliderRow" id="RowBottom">
         <div class="col">
-            <app-slider (sliderID)="8"></app-slider>
+            <app-slider [sliderID]="8"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="9"></app-slider>
+            <app-slider [sliderID]="9"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="10"></app-slider>
+            <app-slider [sliderID]="10"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="11"></app-slider>
+            <app-slider [sliderID]="11"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="12"></app-slider>
+            <app-slider [sliderID]="12"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="13"></app-slider>
+            <app-slider [sliderID]="13"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="14"></app-slider>
+            <app-slider [sliderID]="14"></app-slider>
         </div>
         <div class="col">
-            <app-slider (sliderID)="15"></app-slider>
+            <app-slider [sliderID]="15"></app-slider>
         </div>
 
+    </div>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="row" id="ButtonRow">
+        <button type="button" class="btn btn-info">Help</button>
+        <button type="button" class="btn btn-success">Play</button>
+        <button type="button" class="btn btn-danger">Reset</button>
     </div>
 </div>

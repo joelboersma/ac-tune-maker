@@ -1,11 +1,4 @@
-.container {
-    border: 2px solid green;
-    border-radius: 25px;
-
-    margin-top: 30px;
-}
-
-.row {
+.sliderRow {
     display: flex;
     align-items: space-evenly;
     
@@ -20,11 +13,28 @@
     padding: 0;
 }
 
+.btn-success {
+    align-self: center;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    align-self: flex-end;
+}
+
 #Title {
     display: flex;
     justify-content: center;
 
     margin-top: 20px;
+}
+
+#Notes {
+    border: 2px solid green;
+    border-radius: 25px;
+
+    margin-top: 30px;
+    //margin-bottom: 30px;
 }
 
 #RowTop {
@@ -33,4 +43,15 @@
 
 #RowBottom {
     border-top: 1px solid green;
+}
+
+#ButtonRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
 }

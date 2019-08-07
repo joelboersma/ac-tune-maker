@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Options, ChangeContext } from 'ng5-slider';
 import { Synth } from 'tone';
+import { SongService } from 'src/app/services/song.service';
 
 @Component({
   selector: 'app-slider',
@@ -9,7 +10,12 @@ import { Synth } from 'tone';
 })
 export class SliderComponent implements OnInit {
   @Input() public sliderID: number;
-  vals: Array<string> = ["None", "Hold", 'G', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'A', 'B', 'C', 'D', 'E', '?'];
+  vals: Array<string> = [
+    "None", "Hold", 
+    'G', 'A', 'B', 'C', 'D', 'E', 'F', 
+    'G', 'A', 'B', 'C', 'D', 'E', 
+    '?'
+  ];
   synth = new Synth().toMaster();
 
   value: number = 0;
@@ -25,7 +31,7 @@ export class SliderComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor(private readonly song: SongService) { }
 
   ngOnInit() {
   }
@@ -71,6 +77,9 @@ export class SliderComponent implements OnInit {
   }
 
   onUserChangeEnd(changeContext: ChangeContext): void {
-    // Update note in song
+    this.song.editNote(
+      this.numberToNote(changeContext.value),
+      this.sliderID
+    )
   }
 }
