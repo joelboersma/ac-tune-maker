@@ -2,6 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { Options, ChangeContext } from 'ng5-slider';
 import { Synth } from 'tone';
 import { SongService } from 'src/app/services/song.service';
+import { TranslationService } from 'src/app/services/translation.service';
 
 @Component({
   selector: 'app-slider',
@@ -31,35 +32,16 @@ export class SliderComponent implements OnInit {
     }
   };
 
-  constructor(private readonly song: SongService) { }
+  constructor(
+    private readonly song: SongService,
+    private readonly translation: TranslationService
+  ) { }
 
   ngOnInit() {
   }
 
   numberToLabel(num: number): string {
     return this.vals[num];
-  }
-
-  numberToNote(num: number): string {
-    switch(num) {
-      case 0:  return 'None';
-      case 1:  return 'Hold';
-      case 2:  return 'G4';
-      case 3:  return 'A4';
-      case 4:  return 'B4';
-      case 5:  return 'C5';
-      case 6:  return 'D5';
-      case 7:  return 'E5';
-      case 8:  return 'F5';
-      case 9:  return 'G5';
-      case 10: return 'A5';
-      case 11: return 'B5';
-      case 12: return 'C6';
-      case 13: return 'D6';
-      case 14: return 'E6';
-      case 15: return 'Random';
-      default: return 'Error';
-    }
   }
 
   playNote(note: string): void {
@@ -69,16 +51,16 @@ export class SliderComponent implements OnInit {
   }
 
   onUserChangeStart(changeContext: ChangeContext): void {
-    this.playNote(this.numberToNote(changeContext.value))
+    this.playNote(this.translation.translate(changeContext.value));
   }
 
   onUserChange(changeContext: ChangeContext): void {
-    this.playNote(this.numberToNote(changeContext.value))
+    this.playNote(this.translation.translate(changeContext.value));
   }
 
   onUserChangeEnd(changeContext: ChangeContext): void {
     this.song.editNote(
-      this.numberToNote(changeContext.value),
+      this.translation.translate(changeContext.value),
       this.sliderID
     )
   }

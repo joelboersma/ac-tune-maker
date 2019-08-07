@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SongService } from './services/song.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ac-tune-maker';
+
+  constructor(private readonly song: SongService) {}
 }
