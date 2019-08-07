@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Options, ChangeContext } from 'ng5-slider';
 import { Synth } from 'tone';
 
@@ -8,6 +8,7 @@ import { Synth } from 'tone';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
+  @Input() public sliderID: number;
   vals: Array<string> = ["None", "Hold", 'G', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'A', 'B', 'C', 'D', 'E', '?'];
   synth = new Synth().toMaster();
 
