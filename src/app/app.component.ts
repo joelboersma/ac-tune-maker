@@ -7,6 +7,11 @@ import { SongService } from './services/song.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  private playDisabled: boolean = false;
 
-  constructor(private readonly song: SongService) {}
+  constructor(private readonly song: SongService) {
+    this.song.playing().subscribe(isPlaying => {
+      this.playDisabled = isPlaying;
+    });
+  }
 }
