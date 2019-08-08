@@ -7,7 +7,6 @@ import { SongService } from './services/song.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ac-tune-maker';
 
   constructor(private readonly song: SongService) {}
 }

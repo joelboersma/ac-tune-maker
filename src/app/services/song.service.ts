@@ -1,8 +1,9 @@
 // This service handles the creation and playing of songs.
 
 import { Injectable } from '@angular/core';
-import { Time, Synth, Transport, now } from 'tone';
+import { Time, Synth, Transport } from 'tone';
 import { TranslationService } from './translation.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 class Note {
   readonly frequency: string;
@@ -22,6 +23,7 @@ export class SongService {
     "None", "None", "None", "None",
     "None", "None", "None", "None"
   ];
+  private active = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly translation: TranslationService) {
     Transport.loop = false;
@@ -32,6 +34,7 @@ export class SongService {
   }
 
   public play(): void {
+    this.active.next(true); // Set to true
     this.song = this.makeSong();
 
     // Schedule each note
@@ -46,10 +49,13 @@ export class SongService {
       );
     });
 
+    // Schedule end of song actions
     Transport.schedule(
       (time) => {
         Transport.stop(time);
         Transport.cancel(0);
+        this.active.next(false);
+        console.log("Done!")
       },
       Time("8n") * 17
     )
@@ -95,5 +101,9 @@ export class SongService {
     });
 
     return song;
+  }
+
+  public playing(): Observable<boolean> {
+    return this.active.asObservable();
   }
 }

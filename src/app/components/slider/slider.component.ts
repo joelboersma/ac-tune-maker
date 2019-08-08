@@ -19,6 +19,8 @@ export class SliderComponent implements OnInit {
   ];
   synth = new Synth().toMaster();
 
+  disabled: boolean = false;
+
   value: number = 0;
   options: Options = {
     floor: 0,
@@ -26,6 +28,7 @@ export class SliderComponent implements OnInit {
     animate: false,
     vertical: true,
     hideLimitLabels: true,
+    readOnly: false,
 
     translate: (value: number): string => {
       return this.numberToLabel(value);
@@ -35,7 +38,13 @@ export class SliderComponent implements OnInit {
   constructor(
     private readonly song: SongService,
     private readonly translation: TranslationService
-  ) { }
+  ) { 
+    this.song.playing().subscribe(isPlaying => {
+      // this.options = Object.assign({}, this.options, {readOnly: isPlaying});
+
+      this.disabled = isPlaying;
+    });
+  }
 
   ngOnInit() {
   }
@@ -45,7 +54,7 @@ export class SliderComponent implements OnInit {
   }
 
   playNote(note: string): void {
-    if (note.length === 2) {
+    if (note.length === 2 && !this.disabled) {
       this.synth.triggerAttackRelease(note, '8n');
     }
   }
