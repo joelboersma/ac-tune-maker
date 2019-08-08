@@ -1,7 +1,7 @@
 // This service handles the creation and playing of songs.
 
 import { Injectable } from '@angular/core';
-import { Time, Synth } from 'tone';
+import { Time, Synth, Transport, now } from 'tone';
 import { TranslationService } from './translation.service';
 
 class Note {
@@ -14,6 +14,7 @@ class Note {
   providedIn: 'root'
 })
 export class SongService {
+  private song: Array<Note>;
   private synth = new Synth().toMaster();
   private sliderNotes: Array<string> = [
     "None", "None", "None", "None",
@@ -22,21 +23,42 @@ export class SongService {
     "None", "None", "None", "None"
   ];
 
-  constructor(private readonly translation: TranslationService) { }
+  constructor(private readonly translation: TranslationService) {
+    Transport.loop = false;
+  }
 
-  editNote(note: string, index: number): void {
+  public editNote(note: string, index: number): void {
     this.sliderNotes[index] = note;
   }
 
-  play(): void {
-    let song: Array<Note> = this.makeSong();
-    // song.forEach(note => {
-    //   this.synth.triggerAttackRelease(note.frequency, note.duration, note.time);
-    // });
+  public play(): void {
+    this.song = this.makeSong();
+
+    // Schedule each note
+    this.song.forEach(note => {
+      //console.log(note);
+      Transport.schedule(
+        (time) => {
+          this.synth.triggerAttackRelease(note.frequency, note.duration, time);
+          console.log(note);
+        }, 
+        note.time
+      );
+    });
+
+    Transport.schedule(
+      (time) => {
+        Transport.stop(time);
+        Transport.cancel(0);
+      },
+      Time("8n") * 17
+    )
+
+    Transport.start();
   }
 
   // Each note is format <frequency, duration>
-  makeSong(): Array<Note> {
+  private makeSong(): Array<Note> {
     let song: Array<Note> = [];
 
     this.sliderNotes.forEach((sliderNote, index, sliderNotes) => {
@@ -67,7 +89,6 @@ export class SongService {
           let time: number = Time('8n') * (index);
 
           // Add note to song
-          console.log(frequency, duration, time);
           song.push({frequency, duration, time});
         }
       }
