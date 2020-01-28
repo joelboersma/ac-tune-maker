@@ -63,9 +63,8 @@
 <div class="container d-flex justify-content-center">
     <div class="row" id="ButtonRow">
         <button type="button" class="btn btn-info">Help</button>
-        <button type="button" class="btn btn-success"
-            (click)="song.play()" [disabled]="playDisabled">Play
-        </button>
+        <button type="button" class="btn btn-success" 
+            (click)="song.play()" [appButtonToggle]="reenableButton">Play</button>
         <button type="button" class="btn btn-danger">Reset</button>
     </div>
 </div>
