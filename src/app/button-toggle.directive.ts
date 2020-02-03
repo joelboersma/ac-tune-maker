@@ -12,14 +12,21 @@ export class ButtonToggleDirective {
   
   ngOnInit() {
     this.subscription = this.enableButton.subscribe(value => {
-      if (!value) this.renderer.removeAttribute(this.el.nativeElement, 'disabled');
+      if (!value) {
+        // Disable button
+        this.renderer.setAttribute(this.el.nativeElement, 'disabled', 'true');
+      }
+      else {
+        // Enable button
+        this.renderer.removeAttribute(this.el.nativeElement, 'disabled');
+      }
     })
   }
 
-  @HostListener('click')
-  onClick() {
-    this.renderer.setAttribute(this.el.nativeElement, 'disabled', 'true');
-  }
+  // @HostListener('click')
+  // onClick() {
+  //   this.renderer.setAttribute(this.el.nativeElement, 'disabled', 'true');
+  // }
 
   ngOnDestroy() {
     this.subscription && this.subscription.unsubscribe();

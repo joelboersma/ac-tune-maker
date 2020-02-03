@@ -12,7 +12,10 @@ export class AppComponent {
   constructor(private readonly song: SongService) {
     this.song.playing().subscribe(isPlaying => {
       if (!isPlaying) {
-        this.enableButton.emit();
+        this.enableButton.emit(true);
+      }
+      else {
+        this.enableButton.emit(false);
       }
     });
   }
