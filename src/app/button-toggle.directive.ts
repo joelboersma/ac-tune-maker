@@ -5,13 +5,13 @@ import { Subscription } from 'rxjs';
   selector: '[appButtonToggle]'
 })
 export class ButtonToggleDirective {
-  @Input('appButtonToggle') reenableButton: EventEmitter<boolean>;
+  @Input('appButtonToggle') enableButton: EventEmitter<boolean>;
   subscription: Subscription;
 
   constructor(private renderer: Renderer2, private el: ElementRef) { }
   
   ngOnInit() {
-    this.subscription = this.reenableButton.subscribe(value => {
+    this.subscription = this.enableButton.subscribe(value => {
       if (!value) this.renderer.removeAttribute(this.el.nativeElement, 'disabled');
     })
   }

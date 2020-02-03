@@ -7,12 +7,12 @@ import { SongService } from './services/song.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private reenableButton = new EventEmitter<boolean>();
+  private enableButton = new EventEmitter<boolean>();
 
   constructor(private readonly song: SongService) {
     this.song.playing().subscribe(isPlaying => {
       if (!isPlaying) {
-        this.reenableButton.emit();
+        this.enableButton.emit();
       }
     });
   }
