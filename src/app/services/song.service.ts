@@ -89,6 +89,9 @@ export class SongService {
             if (sliderNotes[i] == 'Hold') {
               duration += Time('8n');
             }
+            else {
+              break;
+            }
           }
 
           // Set time to start playing note
